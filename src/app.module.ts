@@ -1,12 +1,12 @@
 /* npm imports */
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { HttpModule } from '@nestjs/axios';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { HttpModule } from "@nestjs/axios";
 
 /* local imports */
-import { BankingModule } from './banking/banking.module';
-import { HealthController } from './health/health.controller';
-import config from './config/config';
+import { BankingModule } from "./banking/banking.module";
+import { HealthController } from "./health/health.controller";
+import config from "./config/config";
 
 @Module({
   imports: [
