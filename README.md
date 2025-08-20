@@ -109,6 +109,25 @@ All requests include correlation IDs for observability.
 
 ---
 
+## Internal Service Security
+This microservice is secured by an internal authentication mechanism. It should not be exposed directly to external clients, as it's designed to be accessed exclusively by authorized internal services.
+
+All incoming requests are validated by the InternalAuthMiddleware, which checks for a unique shared secret within the x-internal-auth header.
+
+### How to Use It
+
+- API Gateway: Our API Gateway is the only service with permission to access this microservice. It must be configured to include a header named x-internal-auth with the correct secret value in every request it forwards.
+
+- Environment Variables: The secret key is stored as an environment variable to prevent it from being hardcoded. Make sure the following variable is defined in the service's .env file or configuration:
+
+```env
+INTERNAL_AUTH_SECRET_BANKING_SERVICE=your_unique_and_secure_secret_key
+```
+
+- For Development: When testing locally, you can use tools like Postman or Insomnia to manually add the x-internal-auth header to your requests.
+
+---
+
 🔒 Security Notes
 
 - Not exposed directly to clients — always behind API Gateway
