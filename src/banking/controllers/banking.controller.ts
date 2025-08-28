@@ -2,7 +2,7 @@
 import { Controller, Get } from "@nestjs/common";
 
 /* local imports */
-import { BankingService } from "./banking.service";
+import { BankingService } from "../services/banking.service";
 
 @Controller("banking")
 export class BankingController {
