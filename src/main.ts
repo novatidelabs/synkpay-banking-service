@@ -13,7 +13,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>(ConfigKey.PORT, 4000);
+  const port = configService.get<number>(ConfigKey.PORT, 6000);
 
   await app.listen(port);
 
