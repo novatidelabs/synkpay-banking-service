@@ -12,7 +12,6 @@ import { LoggerModule } from "./logging/logger.module";
 import { LoggerService } from "./logging/logger.service";
 import { GlobalExceptionFilter } from "./common/global.exception.filter";
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [config] }),
@@ -21,7 +20,8 @@ import { GlobalExceptionFilter } from "./common/global.exception.filter";
     LoggerModule,
   ],
   controllers: [AppController],
-  providers: [LoggerService,
+  providers: [
+    LoggerService,
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter,

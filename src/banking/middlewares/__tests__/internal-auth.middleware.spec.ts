@@ -19,14 +19,14 @@ describe("InternalAuthMiddleware", () => {
   const EXPECTED_SECRET = "my-super-secret-key";
 
   beforeEach(() => {
-    // Mock del ConfigService
+    // Mock ConfigService
     configService = {
       get: jest.fn().mockReturnValue(EXPECTED_SECRET),
     } as any;
 
     middleware = new InternalAuthMiddleware(configService);
 
-    // Mocks de Request, Response y NextFunction
+    // Mock Request, Response and NextFunction
     mockRequest = {
       headers: {},
     };

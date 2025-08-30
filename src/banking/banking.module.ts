@@ -21,24 +21,26 @@ import { InternalAuthMiddleware } from "./middlewares/internal-auth.middleware";
     SDKFinanceModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const baseUrl = configService.get<string>('SDK_FINANCE_BASE_URL')
+        const baseUrl = configService.get<string>("SDK_FINANCE_BASE_URL");
         if (!baseUrl) {
-          throw new Error('SDK_FINANCE_BASE_URL is not defined in configuration')
+          throw new Error(
+            "SDK_FINANCE_BASE_URL is not defined in configuration",
+          );
         }
 
-        return { baseUrl }
+        return { baseUrl };
       },
     }),
   ],
   controllers: [CurrenciesManagementController],
   providers: [CurrenciesManagementService, RedisTokenService],
 })
-export class BankingModule implements NestModule{
+export class BankingModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     {
       consumer
         .apply(InternalAuthMiddleware)
-        .forRoutes(CurrenciesManagementController)
+        .forRoutes(CurrenciesManagementController);
     }
-}
+  }
 }
