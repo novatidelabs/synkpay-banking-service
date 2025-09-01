@@ -17,11 +17,11 @@ export class InternalAuthMiddleware implements NestMiddleware {
 
   use(req: Request, res: Response, next: NextFunction) {
     const expectedSecret = this.configService.get<string>(
-      ConfigKey.INTERNAL_AUTH_SECRET_BANKING_SERVICE,
+      ConfigKey.INTERNAL_BANKING_SECRET_PROXY_SERVICE,
     );
     if (!expectedSecret) {
       throw new InternalServerErrorException(
-        "Missing INTERNAL_AUTH_SECRET_BANKING_SERVICE in Banking Service configuration",
+        "Missing INTERNAL_BANKING_SECRET_PROXY_SERVICE in Banking Service configuration",
       );
     }
 

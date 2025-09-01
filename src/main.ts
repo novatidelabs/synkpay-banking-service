@@ -13,6 +13,7 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>(ConfigKey.PORT, 6000);
+  const logger = new LoggerService(configService);
 
   await app.listen(port);
 
