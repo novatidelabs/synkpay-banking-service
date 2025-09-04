@@ -1,20 +1,20 @@
 /* npm imports */
-import { Test, TestingModule } from "@nestjs/testing";
+import { Test, TestingModule } from '@nestjs/testing'
 
 /* local imports */
-import { BankingService } from "../banking.service";
+import { BankingService } from '../banking.service'
 
-describe("BankingService", () => {
-  let service: BankingService;
+describe('BankingService', () => {
+  let service: BankingService
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [BankingService],
-    }).compile();
-    service = module.get<BankingService>(BankingService);
-  });
+    }).compile()
+    service = module.get<BankingService>(BankingService)
+  })
 
-  it("should return pong message", () => {
-    expect(service.ping()).toEqual({ message: "pong" });
-  });
-});
+  it('should return pong message', () => {
+    expect(service.ping()).toEqual({ message: 'pong' })
+  })
+})

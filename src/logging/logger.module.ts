@@ -1,9 +1,9 @@
 /** npm imports */
-import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 
 /** local imports */
-import { LoggerService } from "./logger.service";
+import { LoggerService } from './logger.service'
 
 @Module({
   imports: [ConfigModule],

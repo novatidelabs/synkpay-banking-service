@@ -133,6 +133,7 @@ Content-Type: application/json
   "code": "USD",
   "digitalCode": "840",
   "name": "US Dollar",
+  "description": "US Dollar currency"
   "symbol": "$",
   "fraction": 100,
   "scale": 2,
@@ -147,16 +148,18 @@ Creates a new currency with the specified parameters.
 
 **Required Fields:**
 - `code`: Currency code (e.g., "USD", "EUR")
+- `digitalCode`: ISO 4217 digital code
+- `symbol`: Currency symbol
 - `name`: Currency name
+- `description`: Currency description
+- `snPrefix`: Serial number prefix
+
+**Optional Fields:**
+
 - `fraction`: Fraction value
 - `scale`: Decimal scale
 - `type`: Currency type ("FIAT", "CRYPTO", "BONUS", "VIRTUAL")
-
-**Optional Fields:**
-- `digitalCode`: ISO 4217 digital code
-- `symbol`: Currency symbol
 - `active`: Whether the currency is active
-- `snPrefix`: Serial number prefix
 - `availableForExchange`: Whether available for exchange operations
 
 #### Get Currencies View (Filtered)

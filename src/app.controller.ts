@@ -1,5 +1,5 @@
 /** npm imports */
-import { Controller, Get, HttpCode } from "@nestjs/common";
+import { Controller, Get, HttpCode } from '@nestjs/common'
 
 @Controller()
 export class AppController {
@@ -8,6 +8,6 @@ export class AppController {
   @Get()
   @HttpCode(200)
   health(): string {
-    return "SynkPay Banking Service is running successfully!";
+    return 'SynkPay Banking Service is running successfully!'
   }
 }
