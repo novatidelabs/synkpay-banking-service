@@ -20,22 +20,18 @@ export class RedisTokenService {
 
   public async getTokens(userId: string): Promise<{
     sdkFinanceAccessToken: string
-    sdkFinanceRefreshToken: string
   }> {
     const accessRaw = await this.redisService.getValue(this.getKey(userId, 'access'))
-    const refreshRaw = await this.redisService.getValue(this.getKey(userId, 'refresh'))
 
-    if (!accessRaw || !refreshRaw) {
+    if (!accessRaw) {
       this.logger.error(`Tokens not found for the user id ${userId}`)
-      throw new UnauthorizedException('Tokens not found')
+      throw new UnauthorizedException('Access token not found')
     }
 
     const session = JSON.parse(accessRaw) as SessionValue
-    const refresh = JSON.parse(refreshRaw) as RefreshValue
 
     return {
       sdkFinanceAccessToken: session.sdkFinanceToken,
-      sdkFinanceRefreshToken: refresh.sdkFinanceRefreshToken,
     }
   }
 

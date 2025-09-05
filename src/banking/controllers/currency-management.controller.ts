@@ -15,14 +15,13 @@ function isErrorResponse(result: unknown): result is ErrorResponse {
   return typeof result === 'object' && result !== null && 'status' in result && 'data' in result
 }
 
-@Controller('v1/currencies')
+@Controller('v1')
 export class CurrenciesManagementController {
   constructor(private readonly currenciesManagementService: CurrenciesManagementService) {}
 
-  @Get()
-  public async getCurrencies(@Query('callerId') callerId: string, @Req() req: Request, @Res() res: Response) {
-    const authorization = req.headers.authorization
-    const result = await this.currenciesManagementService.getCurrencies(callerId, authorization)
+  @Get('currencies')
+  public async getCurrencies(@Query('callerId') callerId: string, @Res() res: Response) {
+    const result = await this.currenciesManagementService.getCurrencies(callerId)
     if (!result) return res.status(403).json({ error: 'Could not get currencies' })
 
     if (isErrorResponse(result)) {
@@ -33,16 +32,13 @@ export class CurrenciesManagementController {
     return res.status(200).json(result)
   }
 
-  @Post()
+  @Post('currencies')
   public async createCurrency(
     @Query('callerId') callerId: string,
-    //@Headers('authorization') authorization: string | undefined,
     @Body() body: CreateCurrencyDto,
-    @Req() req: Request,
     @Res() res: Response,
   ) {
-    const authorization = req.headers.authorization
-    const result = await this.currenciesManagementService.createCurrency(callerId, body, authorization)
+    const result = await this.currenciesManagementService.createCurrency(callerId, body)
     if (!result) return res.status(403).json({ error: 'Could not create currency' })
 
     if (isErrorResponse(result)) {
@@ -53,15 +49,13 @@ export class CurrenciesManagementController {
     return res.status(200).json(result)
   }
 
-  @Post('view')
+  @Post('currencies/view')
   public async getCurrenciesView(
     @Query('callerId') callerId: string,
     @Body() filterOptions: CurrencyViewDto,
-    @Req() req: Request,
     @Res() res: Response,
   ) {
-    const authorization = req.headers.authorization
-    const result = await this.currenciesManagementService.getCurrenciesView(callerId, filterOptions, authorization)
+    const result = await this.currenciesManagementService.getCurrenciesView(callerId, filterOptions)
     if (!result) return res.status(403).json({ error: 'Could not get currencies view' })
 
     if (isErrorResponse(result)) {
@@ -72,16 +66,14 @@ export class CurrenciesManagementController {
     return res.status(200).json(result)
   }
 
-  @Patch(':currencyId')
+  @Patch('currencies/:currencyId')
   public async updateCurrency(
     @Param('currencyId') currencyId: string,
     @Query('callerId') callerId: string,
     @Body() body: UpdateCurrencyDto,
-    @Req() req: Request,
     @Res() res: Response,
   ) {
-    const authorization = req.headers.authorization
-    const result = await this.currenciesManagementService.updateCurrency(callerId, currencyId, body, authorization)
+    const result = await this.currenciesManagementService.updateCurrency(callerId, currencyId, body)
     if (!result) return res.status(403).json({ error: 'Could not update currency' })
 
     if (isErrorResponse(result)) {
@@ -92,15 +84,13 @@ export class CurrenciesManagementController {
     return res.status(200).json(result)
   }
 
-  @Patch(':currencyId/set-main')
+  @Patch('currencies/:currencyId/set-main')
   public async setMainCurrency(
     @Param('currencyId') currencyId: string,
     @Query('callerId') callerId: string,
-    @Req() req: Request,
     @Res() res: Response,
   ) {
-    const authorization = req.headers.authorization
-    const result = await this.currenciesManagementService.setMainCurrency(callerId, currencyId, authorization)
+    const result = await this.currenciesManagementService.setMainCurrency(callerId, currencyId)
     if (!result) return res.status(403).json({ error: 'Could not set main currency' })
 
     if (isErrorResponse(result)) {

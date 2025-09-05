@@ -8,16 +8,21 @@ import { ConfigKey } from './config/enum'
 import { LoggerService } from './logging/logger.service'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
-  app.setGlobalPrefix('api')
+  try {
+    const app = await NestFactory.create(AppModule)
 
-  const configService = app.get(ConfigService)
-  const port = configService.get<number>(ConfigKey.PORT, 6000)
-  const logger = new LoggerService(configService)
+    const configService = app.get(ConfigService)
+    const port = configService.get<number>(ConfigKey.PORT, 6000)
+    const logger = new LoggerService(configService)
+  
+    await app.listen(port)
+  
+    logger.log(`🚀 Banking service running on http://localhost:${port}/`)
+} catch (error) {
+  if (error instanceof Error) console.error('Error during bootstrap:', error.message)
+  else console.error('Error during bootstrap:', error)
 
-  await app.listen(port)
-
-  logger.log(`🚀 Banking service running on http://localhost:${port}`)
+  process.exit(1)
 }
-
+}
 void bootstrap()

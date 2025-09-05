@@ -38,3 +38,38 @@ export class CurrencyViewDto {
     name?: SortDirection
   }
 }
+
+// Response DTOs
+export class CurrencyDto {
+  id!: string
+  code!: string
+  digitalCode!: string
+  name!: string
+  description!: string
+  symbol!: string
+  fraction?: number
+  scale?: number
+  active?: boolean
+  snPrefix!: string
+  availableForExchange?: boolean
+  type?: CurrencyType
+  main?: boolean
+}
+
+export class CurrencyListResponseDto {
+  status!: number
+  data!: CurrencyDto[]
+}
+
+export class CurrencyResponseDto {
+  status!: number
+  data!: CurrencyDto
+}
+
+export class CurrencyViewResponseDto {
+  status!: number
+  data!: {
+    currencies: CurrencyDto[]
+    total: number
+  }
+}
